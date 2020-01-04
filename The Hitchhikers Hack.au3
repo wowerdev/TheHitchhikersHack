@@ -1,12 +1,13 @@
 #NoTrayIcon
 #RequireAdmin
-#include <THHH_Offsets_3.3.5.au3> ; THHH_Offsets_3.3.2.au3 / THHH_Offsets_3.3.3.au3
-#include <THHH_Language_func.au3>
-#include <THHH_Raccourcis.au3>
-#include <THHH_GetKeyPressed.au3>
-#include <THHH_TPList_func.au3>
-#include <THHH_Reglages.au3>
-#include <MemWriteGCD.au3>
+#include <include/THHH_Offsets_3.3.5.au3>
+#include <include/THHH_Language_func.au3>
+#include <include/THHH_Raccourcis.au3>
+#include <include/THHH_GetKeyPressed.au3>
+#include <include/THHH_TPList_func.au3>
+#include <include/THHH_Reglages.au3>
+#include <include/MemWriteGCD.au3>
+#include <include/NomadMemory.au3>
 #include <ButtonConstants.au3>
 #include <GUIConstantsEx.au3>
 #include <GuiComboBox.au3>
@@ -16,7 +17,6 @@
 #include <SliderConstants.au3>
 #include <EditConstants.au3>
 #include <Misc.au3>
-#include <NomadMemory.au3>
 #include <GuiListView.au3>
 #include <file.au3>
 #include <WinAPI.au3>
@@ -53,7 +53,7 @@ $State = GUICtrlCreateLabel("", 10, 638, 312, 17)
 GUICtrlSetFont(-1,9,600)
 $Optionsbutton = GUICtrlCreateButton("Options", 131, 32, 74, 20, $WS_GROUP)
 $WowProcesslistview = GUICtrlCreateListView("WoW|",266,1,65,73,$LVS_SINGLESEL)
-;;; Création de la liste des processus
+;;; Crï¿½ation de la liste des processus
 For $i = 1 to $WowProcessList[0][0]
 GUICtrlCreateListViewItem($WowProcessList[$i][1], $WowProcesslistview)
 next
@@ -61,17 +61,17 @@ _GUICtrlListView_SetColumnWidth($WowProcesslistview,0,40)
 _GUICtrlListView_SetItemSelected($WowProcesslistview,0)
 $SelectedPID = _GUICtrlListView_GetSelectedIndices(GUICtrlGetHandle($WowProcesslistview))
 If $Wowpid1 = "" Then
-MsgBox(0,"", "Wow n'est pas lancé")
+MsgBox(0,"", "Wow n'est pas lancï¿½")
 Exit
 Else
 ;;; On sauve le nombre de processus pour comparer ensuite avec le nombre de processus actuels
-;;; (et ainsi savoir si un deuxième jeu a été lancé ou fermé)
+;;; (et ainsi savoir si un deuxiï¿½me jeu a ï¿½tï¿½ lancï¿½ ou fermï¿½)
 $WowProcessListViewItemCountSave = _GUICtrlListView_GetItemCount($WowProcesslistview)
 $SelectedPIDadd = ($SelectedPID+1)
 $WowPid = $WowProcessList[$SelectedPIDadd][1]
 $WowProcess = _MEMORYOPEN($WowPid)
 EndIf
-;;; On commence la lecture de mémoire et l'écriture !
+;;; On commence la lecture de mï¿½moire et l'ï¿½criture !
 $PB1 = _MemoryRead($StaticPlayer,$WowProcess,"Ptr")
 $PB2 = _MemoryRead($PB1+$PbPointer1,$WowProcess,"Ptr")
 $PlayerBase = _MemoryRead($PB2+$PbPointer2,$WowProcess,"Ptr")
@@ -80,7 +80,7 @@ $PlayerScaleVar=_MemoryRead($PlayerBase+$PlayerScale,$WowProcess,"float")
 $PlayerHauteurVar=_MemoryRead($PlayerBase+$PlayerHauteur,$WowProcess,"float")
 $PlayerLargeurVar=_MemoryRead($PlayerBase+$PlayerLargeur,$WowProcess,"float")
 $SautVar=_MemoryRead($PlayerBase+$HauteurSaut,$WowProcess,"float")
-	 _MemoryWrite($PlayerBase2+$Hunt,$WowProcess,0) ;      Mise à 0 des pistages car le pistage marche par
+	 _MemoryWrite($PlayerBase2+$Hunt,$WowProcess,0) ;      Mise ï¿½ 0 des pistages car le pistage marche par
 	 _MemoryWrite($PlayerBase2+$Ressources,$WowProcess,0) ;addition de valeurs (on part du principe qu'on par de 0)
 $PlayerHauteurRESET=$PlayerHauteurVar
 $PlayerLargeurRESET=$PlayerLargeurVar
@@ -93,16 +93,16 @@ $MEMORYCAMROTZ = $MEMORYCAM + $CAM_CAMERAROTZ
 $MEMORYCAMROTX = $MEMORYCAM + $CAM_CAMERAROTX
 $tab = GUICtrlCreateTab(0, 55, 332, 635)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PRIVE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-$tab0 = GUICtrlCreateTabItem("Fonctions (Privé)")
+$tab0 = GUICtrlCreateTabItem("Fonctions (Privï¿½)")
 If IniRead($Setting,"Reglages","Interface","Erreur") = 1 Then
 GUICTRLCREATEPIC(@ScriptDir&"\thhh_settings\skin\top.jpg", 0, 0, 332, 55, BitOR($WS_GROUP,$WS_CLIPSIBLINGS))
 GUICTRLCREATEPIC(@ScriptDir&"\thhh_settings\skin\mid_priv.jpg", 0, 76, 330, 560, $WS_GROUP)
-$PriveTeleportationGRP = GUICtrlCreateLabel("Téléportation", 167, 80, 75, 17)
+$PriveTeleportationGRP = GUICtrlCreateLabel("Tï¿½lï¿½portation", 167, 80, 75, 17)
 $PrivePVPGRP = GUICtrlCreateLabel("JcJ", 172, 310, 30, 17)
 $PriveXYZGRP = GUICtrlCreateLabel("XYZ", 172, 235, 30, 17)
 $PriveTrackingGRP = GUICtrlCreateLabel("Pistage", 30, 485, 50, 17)
 Else
-$PriveTeleportationGRP = GUICtrlCreateGroup("Téléportation", 157, 80, 170, 155)
+$PriveTeleportationGRP = GUICtrlCreateGroup("Tï¿½lï¿½portation", 157, 80, 170, 155)
 $PrivePVPGRP = GUICtrlCreateGroup("JcJ", 162, 310, 115, 70)
 $PriveXYZGRP = GUICtrlCreateGroup("XYZ", 162, 235, 125, 75)
 $PriveTrackingGRP = GUICtrlCreateGroup("Pistage", 20, 485, 291, 115)
@@ -126,7 +126,7 @@ $PriveXInputTP = GUICtrlCreateInput("", 190, 135, 60, 18)
 $PriveYInputTP = GUICtrlCreateInput("", 190, 155, 60, 18)
 $PriveZInputTP = GUICtrlCreateInput("", 190, 175, 60, 18)
 $PriveCopyTP = GUICtrlCreateButton("*", 190, 98, 22, 15, $WS_GROUP)
-$PriveGoTP = GUICtrlCreateButton("Téléporter", 195, 200, 55, 25, $WS_GROUP)
+$PriveGoTP = GUICtrlCreateButton("Tï¿½lï¿½porter", 195, 200, 55, 25, $WS_GROUP)
 $PriveGoCorps = GUICtrlCreateButton("TP Corps", 251, 200, 68, 25, $WS_GROUP)
 $ListOuvrir = GUICtrlCreateButton("Liste", 163, 200, 30, 25, $WS_GROUP)
 $PriveXYZON = GUICtrlCreateCheckbox("Checkbox", 266, 260, 15, 15)
@@ -138,9 +138,9 @@ $PriveTPcibleUndermap = GUICtrlCreateButton("TP Cible (sous map)", 167, 350, 104
 $PriveClickTP = GUICtrlCreateCheckbox("Checkbox",242,387,17,17)
 GUICtrlCreateLabel("Click to TP",167,388,58,17)
 $PriveCollisionsM2 = GUICtrlCreateCheckbox("Checkbox",297,420,17,17)
-$LBLPriveCollisionsM2 = GUICtrlCreateLabel("Désactiver collisions M2",167,421,120,17)
+$LBLPriveCollisionsM2 = GUICtrlCreateLabel("Dï¿½sactiver collisions M2",167,421,120,17)
 $PriveCollisionsWMO = GUICtrlCreateCheckbox("Checkbox",297,440,17,17)
-$LBLPriveCollisionsWMO = GUICtrlCreateLabel("Désactiver collisions WMO",167,441,130,17)
+$LBLPriveCollisionsWMO = GUICtrlCreateLabel("Dï¿½sactiver collisions WMO",167,441,130,17)
 $PriveCollisionsAll = GUICtrlCreateCheckbox("Checkbox",205,460,17,17)
 GUICtrlCreateLabel("Noclip",167,461,130,17)
 $PriveSpeedGlobaleON = GUICtrlCreateCheckbox("Checkbox", 132, 90, 15, 15)
@@ -163,7 +163,7 @@ $LBLWalkonwater = GUICtrlCreateLabel("Marche sur l'eau", 30, 211, 80, 17)
 $PriveUnderwaterWalkON = GUICtrlCreateCheckbox("Checkbox", 132, 230, 15, 15)
 $LBLUnderwaterWalk = GUICtrlCreateLabel("Marche sous l'eau", 30, 231, 90, 17)
 $PriveMountON = GUICtrlCreateCheckbox("Checkbox", 132, 250, 15, 15)
-$LBLMount = GUICtrlCreateLabel("Monture en intérieur", 30, 251, 97, 17)
+$LBLMount = GUICtrlCreateLabel("Monture en intï¿½rieur", 30, 251, 97, 17)
 $PriveWallClimbON = GUICtrlCreateCheckbox("Checkbox", 132, 270, 15, 15)
 $LBLWallclimb = GUICtrlCreateLabel("Grimper partout", 30, 271, 75, 17)
 $NoCooldownCheck = GUICtrlCreateCheckbox("Checkbox", 132, 290, 15, 15)
@@ -176,21 +176,21 @@ $PriveSuperSautON = GUICtrlCreateCheckbox("Checkbox", 132, 350, 15, 15)
 $LBLSupersaut = GUICtrlCreateLabel("Super-saut", 30, 351, 66, 17)
 $PriveSuperSautInput = GUICtrlCreateInput(22, 30, 371, 115, 20)
 $PriveFactionMENU = GUICtrlCreateCombo("Faction",30, 395,115, 25)
-GUICtrlSetData(-1, "Créature|Alliance|Horde")
-$PriveDebloPerso = GUICtrlCreateButton("Débloquer Perso", 30, 420, 116, 25, $WS_GROUP)
+GUICtrlSetData(-1, "Crï¿½ature|Alliance|Horde")
+$PriveDebloPerso = GUICtrlCreateButton("Dï¿½bloquer Perso", 30, 420, 116, 25, $WS_GROUP)
 $StopchuteON = GUICtrlCreateButton("Stopper chute", 30, 445, 116, 25, $WS_GROUP)
 $PriveTrackHerbes = GUICtrlCreateCheckbox("Herbes", 30, 500, 69, 15)
 $PriveTrackFilons = GUICtrlCreateCheckbox("Filons", 30, 520, 69, 15)
 $PriveTrackCoffres = GUICtrlCreateCheckbox("Coffres", 30, 540, 69, 15)
 $PriveTrackPoissons = GUICtrlCreateCheckbox("Poissons", 30, 560, 69, 15)
 $PriveTrackAllRes = GUICtrlCreateCheckbox("Tout", 30, 580, 68, 15)
-$PriveTrackBetes = GUICtrlCreateCheckbox("Bêtes", 130, 500, 69, 15)
+$PriveTrackBetes = GUICtrlCreateCheckbox("Bï¿½tes", 130, 500, 69, 15)
 $PriveTrackDragons = GUICtrlCreateCheckbox("Dragons", 130, 520, 69, 15)
-$PriveTrackDemons = GUICtrlCreateCheckbox("Démons", 130, 540, 69, 15)
-$PriveTrackElementaires = GUICtrlCreateCheckbox("Elémentaires", 130, 560, 71, 15)
-$PriveTrackGeants = GUICtrlCreateCheckbox("Géants", 210, 500, 69, 15)
+$PriveTrackDemons = GUICtrlCreateCheckbox("Dï¿½mons", 130, 540, 69, 15)
+$PriveTrackElementaires = GUICtrlCreateCheckbox("Elï¿½mentaires", 130, 560, 71, 15)
+$PriveTrackGeants = GUICtrlCreateCheckbox("Gï¿½ants", 210, 500, 69, 15)
 $PriveTrackMortsVivants = GUICtrlCreateCheckbox("Morts-vivants", 210, 520, 85, 15)
-$PriveTrackHumanoides = GUICtrlCreateCheckbox("Humanoïdes", 210, 540, 77, 15)
+$PriveTrackHumanoides = GUICtrlCreateCheckbox("Humanoï¿½des", 210, 540, 77, 15)
 $PriveTrackBestioles = GUICtrlCreateCheckbox("Bestioles", 210, 560, 69, 15)
 $PriveTrackAllBet = GUICtrlCreateCheckbox("Tout", 170, 580, 68, 15)
 $PriveRaccourcis = GUICtrlCreateCheckbox("Checkbox", 300, 610, 15, 15)
@@ -219,9 +219,9 @@ GUICtrlCreateLabel("No-Clip Action", 182, 191, 70, 17)
 $WallClimbON = GUICtrlCreateCheckbox("Checkbox", 135, 105, 15, 15)
 $LBLWallclimbOf = GUICtrlCreateLabel("Grimper partout", 35, 105, 75, 17)
 $CollisionsM2 = GUICtrlCreateCheckbox("Checkbox",297,225,17,17)
-$LBLCollisionsM2Of = GUICtrlCreateLabel("Désactiver collisions M2",167,226,120,17)
+$LBLCollisionsM2Of = GUICtrlCreateLabel("Dï¿½sactiver collisions M2",167,226,120,17)
 $CollisionsWMO = GUICtrlCreateCheckbox("Checkbox",297,245,17,17)
-$LBLCollisionsWMOOf = GUICtrlCreateLabel("Désactiver collisions WMO",167,246,130,17)
+$LBLCollisionsWMOOf = GUICtrlCreateLabel("Dï¿½sactiver collisions WMO",167,246,130,17)
 $CollisionsAll = GUICtrlCreateCheckbox("Checkbox",205,265,17,17)
 GUICtrlCreateLabel("Noclip",167,266,130,17)
 $WalljumpON = GUICtrlCreateCheckbox("Checkbox", 135, 125, 15, 15)
@@ -235,19 +235,19 @@ $SuperSautON = GUICtrlCreateCheckbox("Checkbox", 135, 185, 15, 15)
 $LBLSupersautOf = GUICtrlCreateLabel("Super-saut", 35, 185, 54, 17)
 $SuperSautInput = GUICtrlCreateInput(22, 35, 205, 115, 20)
 $FactionMENU = GUICtrlCreateCombo("Faction",35, 230, 115, 25)
-GUICtrlSetData(-1, "Créature|Alliance|Horde")
+GUICtrlSetData(-1, "Crï¿½ature|Alliance|Horde")
 $TrackHerbes = GUICtrlCreateCheckbox("Herbes", 30, 305, 69, 15)
 $TrackFilons = GUICtrlCreateCheckbox("Filons", 30, 325, 69, 15)
 $TrackCoffres = GUICtrlCreateCheckbox("Coffres", 30, 345, 69, 15)
 $TrackPoissons = GUICtrlCreateCheckbox("Poissons", 30, 365, 69, 15)
 $TrackAllRes = GUICtrlCreateCheckbox("Tout", 30, 385, 68, 15)
-$TrackBetes = GUICtrlCreateCheckbox("Bêtes", 130, 305, 69, 15)
+$TrackBetes = GUICtrlCreateCheckbox("Bï¿½tes", 130, 305, 69, 15)
 $TrackDragons = GUICtrlCreateCheckbox("Dragons", 130, 325, 69, 15)
-$TrackDemons = GUICtrlCreateCheckbox("Démons", 130, 345, 69, 15)
-$TrackElementaires = GUICtrlCreateCheckbox("Elémentaires", 130, 365, 71, 15)
-$TrackGeants = GUICtrlCreateCheckbox("Géants", 210, 305, 69, 15)
+$TrackDemons = GUICtrlCreateCheckbox("Dï¿½mons", 130, 345, 69, 15)
+$TrackElementaires = GUICtrlCreateCheckbox("Elï¿½mentaires", 130, 365, 71, 15)
+$TrackGeants = GUICtrlCreateCheckbox("Gï¿½ants", 210, 305, 69, 15)
 $TrackMortsVivants = GUICtrlCreateCheckbox("Morts-Vivants", 210, 325, 85, 15)
-$TrackHumanoides = GUICtrlCreateCheckbox("Humanoïdes", 210, 345, 77, 15)
+$TrackHumanoides = GUICtrlCreateCheckbox("Humanoï¿½des", 210, 345, 77, 15)
 $TrackBestioles = GUICtrlCreateCheckbox("Bestioles", 210, 365, 69, 15)
 $TrackAllBet = GUICtrlCreateCheckbox("Tout", 170, 385, 68, 15)
 $Raccourcis = GUICtrlCreateCheckbox("Checkbox", 300, 610, 15, 15)
@@ -259,12 +259,12 @@ GUICTRLCREATEPIC(@ScriptDir&"\thhh_settings\skin\top.jpg", 0, 0, 332, 55, BitOR(
 GUICTRLCREATEPIC(@ScriptDir&"\thhh_settings\skin\mid_jou.jpg", 0, 76, 330, 479, $WS_GROUP)
 $PlayerTailleGRP = GUICtrlCreateLabel("Taille", 40, 90, 45, 17)
 $PlayerShowGRP = GUICtrlCreateLabel("Affichage", 215, 220, 80, 17)
-$CameraGRP = GUICtrlCreateLabel("Caméra", 40, 305, 45, 17)
+$CameraGRP = GUICtrlCreateLabel("Camï¿½ra", 40, 305, 45, 17)
 $TempsGRP = GUICtrlCreateLabel("Temps", 205, 300, 45, 17)
 Else
 $PlayerTailleGRP = GUICtrlCreateGroup("Taille Joueur", 30, 90, 265, 125)
 $PlayerShowGRP = GUICtrlCreateGroup("Affichage", 205, 220, 90, 70)
-$CameraGRP = GUICtrlCreateGroup("Caméra", 30, 305, 160, 105)
+$CameraGRP = GUICtrlCreateGroup("Camï¿½ra", 30, 305, 160, 105)
 $TempsGRP = GUICtrlCreateGroup("Temps", 195, 300, 100, 110)
 GUICtrlCreateGroup("", 30, 220, 170, 75)
 GUICtrlCreateGroup("", 30, 415, 195, 80)
@@ -300,7 +300,7 @@ $CameraSpectateNoclip =  GUICtrlCreateCheckbox("Checkbox", 170, 340, 15, 15)
 $LBLNoclipCamera = GUICtrlCreateLabel("Traverser tout", 40, 340, 100, 17)
 $CameraFollow =  GUICtrlCreateCheckbox("Checkbox", 170, 360, 15, 15)
 $LBLFollowTar = GUICtrlCreateLabel("Suivre la cible", 40, 360, 100, 17)
-$PriveTeleportCamera = GUICtrlCreateButton("TP Caméra (Serv. privé)", 50, 380, 120)
+$PriveTeleportCamera = GUICtrlCreateButton("TP Camï¿½ra (Serv. privï¿½)", 50, 380, 120)
 $HeureInput = GUICtrlCreateInput(_MemoryRead($TimeHeure,$WowProcess,"dword"), 240, 315, 25, 20)
 $LBLHeure = GUICtrlCreateLabel("Heures", 200, 316, 40, 17)
 $HeureInputOK = GUICtrlCreateButton("Ok", 270, 315, 20, 20, $WS_GROUP)
@@ -310,12 +310,12 @@ $MinutesInputOK = GUICtrlCreateButton("Ok", 270, 340, 20, 20, $WS_GROUP)
 $VitesseTempsInput = GUICtrlCreateInput(1, 240, 365, 50, 20)
 $LBLVitesseTemps = GUICtrlCreateLabel("Vitesse", 200, 366, 40, 17)
 $VitesseTempsInputOK = GUICtrlCreateButton("Ok", 270, 385, 20, 20, $WS_GROUP)
-$MapSHOW = GUICtrlCreateButton("Dévoiler la carte", 200, 510, 90, 28, $WS_GROUP)
+$MapSHOW = GUICtrlCreateButton("Dï¿½voiler la carte", 200, 510, 90, 28, $WS_GROUP)
 $TitreMENU = GUICtrlCreateCombo("0   Titre", 30, 515, 160, 25)
-GUICtrlSetData(-1, "0   Aucun|1   Soldat|2   Caporal|3   Sergent|4   Sergent-Chef|5   Sergent-Major|6   Chevalier|7   Chevalier-Lieutenant|8   Chevalier-Capitaine|9   Chevalier-Champion|10   Lieutenant-Commandant|11   Commandant|12   Maréchal|13   Grand Maréchal|14   Connétable|15   Éclaireur|16   Grunt|17   Sergent|18   Sergent-Chef|19   Adjudant|20   Garde de pierre|21   Garde de sang|22   Légionnaire|23   Centurion|24   Champion|25   Lieutenant Général|26   Général|27   Seigneur de Guerre|28   Grand Seigneur de Guerre|29   Gladiateur/rice|30   Duelliste|31   Rival/e|32   Compétiteur/rice|33   Seigneur Scarabée|34   Conquérant/e|35   Justicier/ère|36   Champion/ne des Naarus|37   Gladiateur/rice impitoyable|38   du Soleil Brisé|39   Main d'A'dal|40   Gladiateur Vengeur/Vengeresse|41   Maître de Guerre|42   le Chercheur/se|43   Ancien/ne|44   Gardien/ne des flammes|45   Garde-Flammes|46   L'exalté/e|47   L'explorateur/rice|48   Le/La diplomate|49   Gladiateur Brutal/e|50   Maître d'arène|51   loup de mer|52   Chef|53   Le/la Suprême|54   des Dix Tempêtes|55   du Rêve d'émeraude|56   Gladiateur Fatal/Fatale|57   Prophète|58   Le/La Maléfique|59   Traqueur/euse|60   de la Lame d'Ebène|61   Archimage|62   Porteguerre|63   Assassin|66   Cordon Bleu|69   Docteur|70   Grand maître pêcheur|78   de Quel'Thalas|79   d'Argus|80   de Kaz Modan|81   de Gnomeregan|82   au coeur de lion|83   champion d'Elune|84   héros d'Orgrimmar|85   le coureur des plaines|86   des Sombrelances|87   le réprouvé|88   le cherche-magie|89   Vainqueur du crépuscule|90   conquérant de Naxxramas")
+GUICtrlSetData(-1, "0   Aucun|1   Soldat|2   Caporal|3   Sergent|4   Sergent-Chef|5   Sergent-Major|6   Chevalier|7   Chevalier-Lieutenant|8   Chevalier-Capitaine|9   Chevalier-Champion|10   Lieutenant-Commandant|11   Commandant|12   Marï¿½chal|13   Grand Marï¿½chal|14   Connï¿½table|15   ï¿½claireur|16   Grunt|17   Sergent|18   Sergent-Chef|19   Adjudant|20   Garde de pierre|21   Garde de sang|22   Lï¿½gionnaire|23   Centurion|24   Champion|25   Lieutenant Gï¿½nï¿½ral|26   Gï¿½nï¿½ral|27   Seigneur de Guerre|28   Grand Seigneur de Guerre|29   Gladiateur/rice|30   Duelliste|31   Rival/e|32   Compï¿½titeur/rice|33   Seigneur Scarabï¿½e|34   Conquï¿½rant/e|35   Justicier/ï¿½re|36   Champion/ne des Naarus|37   Gladiateur/rice impitoyable|38   du Soleil Brisï¿½|39   Main d'A'dal|40   Gladiateur Vengeur/Vengeresse|41   Maï¿½tre de Guerre|42   le Chercheur/se|43   Ancien/ne|44   Gardien/ne des flammes|45   Garde-Flammes|46   L'exaltï¿½/e|47   L'explorateur/rice|48   Le/La diplomate|49   Gladiateur Brutal/e|50   Maï¿½tre d'arï¿½ne|51   loup de mer|52   Chef|53   Le/la Suprï¿½me|54   des Dix Tempï¿½tes|55   du Rï¿½ve d'ï¿½meraude|56   Gladiateur Fatal/Fatale|57   Prophï¿½te|58   Le/La Malï¿½fique|59   Traqueur/euse|60   de la Lame d'Ebï¿½ne|61   Archimage|62   Porteguerre|63   Assassin|66   Cordon Bleu|69   Docteur|70   Grand maï¿½tre pï¿½cheur|78   de Quel'Thalas|79   d'Argus|80   de Kaz Modan|81   de Gnomeregan|82   au coeur de lion|83   champion d'Elune|84   hï¿½ros d'Orgrimmar|85   le coureur des plaines|86   des Sombrelances|87   le rï¿½prouvï¿½|88   le cherche-magie|89   Vainqueur du crï¿½puscule|90   conquï¿½rant de Naxxramas")
 $LBLEmote = GUICtrlCreateLabel("Emote sur la cible:", 85, 425, 110, 17)
 $EmoteMENU = GUICtrlCreateCombo("0   Emote", 40, 445, 175, 25)
-GUICtrlSetData(-1, "0   Aucun|1   Parler|2   Saluer|3   Saluer (main)|4   Acclamer|5   Affirmation|6   Question|10   Danse|11   Rire|14   Geste grossier|15   Rugir|16   Agenouiller|17   Bise|18   Pleurer|19   Poulet|20   Mendier|21   Applaudir|22   Crier|23   Montrer muscles|24   Timide|25   Montrer|28   Travailler|33   Recevoir coup|34   Recevoir coup (critique)|35   Attaque (sans arme)|36   Attaque (1 main)|37   Attaque (2 mains)|38   Attaque (2 mains)2|39   Parrer (sans arme)|43   Parrer (Bouclier)|44   Prêt attaque (sans arme)|45   Prêt attaque (1 main)|48   Prêt attaque (arc)|54   Attaque spéciale (1 main)|60   Coup de pied|61   Attaque (lancer)|64   Assommé|66   Saluer (Garde à vous)|69   Utiliser objet|92   Boire|173   Travailler (avec arme)|213   Prêt attaque (fusil)|233   Travailler (Son minage)|234   Travailler (Son bûcheron)|273   Oui|274   Non|275   Train|375   Prêt attaque (2 mains)|379   Pêche|380   Pêche lancé|381   Loot|382   Tourbillon|383   Noyé (fin)|384   Viser (arc)|385   Viser (fusil)|386   Viser (lancé)|387   Noyé (début)|389   Attaque ratée|390   Attaque esquivée|395   Saut (fin)|398   Agenouiller (maintenue)|399   Saut (début)|400   Danse Speciale (Humains uniquement)|415   Assis")
+GUICtrlSetData(-1, "0   Aucun|1   Parler|2   Saluer|3   Saluer (main)|4   Acclamer|5   Affirmation|6   Question|10   Danse|11   Rire|14   Geste grossier|15   Rugir|16   Agenouiller|17   Bise|18   Pleurer|19   Poulet|20   Mendier|21   Applaudir|22   Crier|23   Montrer muscles|24   Timide|25   Montrer|28   Travailler|33   Recevoir coup|34   Recevoir coup (critique)|35   Attaque (sans arme)|36   Attaque (1 main)|37   Attaque (2 mains)|38   Attaque (2 mains)2|39   Parrer (sans arme)|43   Parrer (Bouclier)|44   Prï¿½t attaque (sans arme)|45   Prï¿½t attaque (1 main)|48   Prï¿½t attaque (arc)|54   Attaque spï¿½ciale (1 main)|60   Coup de pied|61   Attaque (lancer)|64   Assommï¿½|66   Saluer (Garde ï¿½ vous)|69   Utiliser objet|92   Boire|173   Travailler (avec arme)|213   Prï¿½t attaque (fusil)|233   Travailler (Son minage)|234   Travailler (Son bï¿½cheron)|273   Oui|274   Non|275   Train|375   Prï¿½t attaque (2 mains)|379   Pï¿½che|380   Pï¿½che lancï¿½|381   Loot|382   Tourbillon|383   Noyï¿½ (fin)|384   Viser (arc)|385   Viser (fusil)|386   Viser (lancï¿½)|387   Noyï¿½ (dï¿½but)|389   Attaque ratï¿½e|390   Attaque esquivï¿½e|395   Saut (fin)|398   Agenouiller (maintenue)|399   Saut (dï¿½but)|400   Danse Speciale (Humains uniquement)|415   Assis")
 $SetTargetEmote = GUICtrlCreateButton("Ok", 40, 470, 175, 20, $WS_GROUP)
 GUISetState(@SW_SHOW, $THHHGUI)
 #EndRegion ### END GUI ###
@@ -328,10 +328,10 @@ $Espanol = GUICtrlCreatePic(@ScriptDir&"\thhh_settings\es.jpg", 305, 30, 20, 13)
 $InterfaceOff = GUICtrlCreateCheckbox("Checkbox", 15, 50, 15, 15)
 $LBLInterfaceOff = GUICtrlCreateLabel("Utiliser l'interface de base", 35, 50, 200, 50)
 $ContinueOnExit = GUICtrlCreateCheckbox("Checkbox", 15, 80, 15, 15)
-$LBLContinueOnExit = GUICtrlCreateLabel("Conserver les fonctions activées après fermeture du programme", 35, 80, 200, 50)
+$LBLContinueOnExit = GUICtrlCreateLabel("Conserver les fonctions activï¿½es aprï¿½s fermeture du programme", 35, 80, 200, 50)
 $SaveSettings = GUICtrlCreateCheckbox("Checkbox", 15, 120, 15, 15)
-$LBLSaveSettings = GUICtrlCreateLabel("Conserver les paramètres suivants à chaque lancement:", 35, 122, 200, 50)
-$LaunchPrivateGRP = GUICtrlCreateGroup("Privé", 15, 155, 200, 120)
+$LBLSaveSettings = GUICtrlCreateLabel("Conserver les paramï¿½tres suivants ï¿½ chaque lancement:", 35, 122, 200, 50)
+$LaunchPrivateGRP = GUICtrlCreateGroup("Privï¿½", 15, 155, 200, 120)
 $LaunchSpeed = GUICtrlCreateCheckbox("Checkbox", 20, 170, 15, 15)
 $LBLLaunchSpeed = GUICtrlCreateLabel("Vitesse", 40, 172, 60, 17)
 $LaunchFly = GUICtrlCreateCheckbox("Checkbox", 20, 190, 15, 15)
@@ -363,12 +363,12 @@ $LaunchRaccourcisOfficiel = GUICtrlCreateCheckbox("Checkbox", 225, 250, 15, 15)
 $LBLLaunchRaccourcisOfficiel = GUICtrlCreateLabel("Raccourcis", 245, 252, 65, 17)
 #EndRegion ### END SETTINGS ###
 #Region ### DEBLOQUER PERSO ###
-$DebloPerso = GUICreate("  Débloquer le perso", 290, 110, -1, -1, -1, $WS_EX_TOOLWINDOW)
+$DebloPerso = GUICreate("  Dï¿½bloquer le perso", 290, 110, -1, -1, -1, $WS_EX_TOOLWINDOW)
 WinSetOnTop($DebloPerso, "", 1)
 GUISetBkColor(0xefefef)
 $GUITRANSDeblo = GUICtrlCreateCheckbox("Checkbox", 5, 5, 15, 15)
 $TransparenceDeblo = GUICtrlCreateLabel("Transparence", 25, 7, 80, 17)
-$DebloPersobutton = GUICtrlCreateButton("Cliquez pour débloquer votre perso", 30, 25, 230, 70, $WS_GROUP)
+$DebloPersobutton = GUICtrlCreateButton("Cliquez pour dï¿½bloquer votre perso", 30, 25, 230, 70, $WS_GROUP)
 GUISetState(@SW_HIDE, $DebloPerso)
 #EndRegion ### END DEBLOQUER PERSO ###
 #Region ### STOP CHUTE ###
@@ -377,7 +377,7 @@ WinSetOnTop($Stopchute, "", 1)
 GUISetBkColor(0xefefef)
 $GUITRANSStop = GUICtrlCreateCheckbox("Checkbox", 5, 5, 15, 15)
 $TransparenceStopChute = GUICtrlCreateLabel("Transparence", 25, 7, 80, 17)
-$Stopchutebutton = GUICtrlCreateButton("Cliquez pour arrêter votre chute", 30, 25, 230, 70, $WS_GROUP)
+$Stopchutebutton = GUICtrlCreateButton("Cliquez pour arrï¿½ter votre chute", 30, 25, 230, 70, $WS_GROUP)
 GUISetState(@SW_HIDE, $Stopchute)
 #EndRegion ### END STOP CHUTE ###
 #Region ### LISTE TP ###
@@ -391,7 +391,7 @@ Global $Liste = @ScriptDir&"\thhh_TPlist.ini"
 $line = 1
 $CountLines = _FileCountLines($liste)
 $CountLinesTotal = ($CountLines-6)
-$PreviewList = GUICtrlCreateListView("n°|Nom|Map|X|Y|Z|Commentaire",0,50,660,450)
+$PreviewList = GUICtrlCreateListView("nï¿½|Nom|Map|X|Y|Z|Commentaire",0,50,660,450)
 _GUICtrlListView_SetColumnWidth($PreviewList,0,26)
 _GUICtrlListView_SetColumnWidth($PreviewList,1,235)
 _GUICtrlListView_SetColumnWidth($PreviewList,2,35)
@@ -399,7 +399,7 @@ _GUICtrlListView_SetColumnWidth($PreviewList,3,35)
 _GUICtrlListView_SetColumnWidth($PreviewList,4,35)
 _GUICtrlListView_SetColumnWidth($PreviewList,5,35)
 _GUICtrlListView_SetColumnWidth($PreviewList,6,150)
-$listTeleportGO = GUICtrlCreateButton("Téléporter !",320,510,180,40)
+$listTeleportGO = GUICtrlCreateButton("Tï¿½lï¿½porter !",320,510,180,40)
 $WEHcheckbox = GUICtrlCreateCheckbox("Checkbox", 430, 555, 15, 15)
 $LVLlisteweh = GUICtrlCreateLabel("Liste WEH", 370, 557, 54, 17)
 $AddTPGRP = GUICtrlCreateGroup("Ajouter un TP", 670, 55, 120, 105)
@@ -407,7 +407,7 @@ $LBLNomTP = GUICtrlCreateLabel("Nom de votre TP", 690, 75, 90, 17)
 $AddTPNameInput = GUICtrlCreateInput("", 675, 90, 110, 20)
 $AddTP = GUICtrlCreateButton("Ajouter TP",680,115,100,35)
 $DelTPGRP = GUICtrlCreateGroup("Supprimer un TP", 670, 180, 120, 105)
-$LBLTPNumber = GUICtrlCreateLabel("n° du TP", 705, 200, 60, 17)
+$LBLTPNumber = GUICtrlCreateLabel("nï¿½ du TP", 705, 200, 60, 17)
 $DelTPInput = GUICtrlCreateInput("", 705, 215, 50, 20)
 $DelTP = GUICtrlCreateButton("Supprimer TP",680,240,100,35)
 $MapActuName = GUICtrlCreateInput("", 701, 295, 60, 20, $ES_READONLY)
@@ -432,7 +432,7 @@ refreshSCtext("Noclipaction", $SettingInputNoclipAction)
 GUISetState(@SW_HIDE, $SCsettingsGUI)
 #EndRegion ### END RACCOURCIS OFFICIEL ###
 #Region ### RACCOURCIS PRIVE ###
-$PriveSCsettingsGUI = GUICreate("Raccourcis Privé", 545, 620, -1, -1, -1)
+$PriveSCsettingsGUI = GUICreate("Raccourcis Privï¿½", 545, 620, -1, -1, -1)
 GUISetBkColor(0xefefef)
 ;;; FONCTIONS
 $PriveSCsettingsGUIGRPFonction = GUICtrlCreateGroup("Fonctions", 15, 10, 170, 320)
@@ -447,7 +447,7 @@ $LBLSCWallclimb = GUICtrlCreateLabel("Grimper partout", 25, 103, 75, 17)
 $PriveSettingInputSupersaut = GUICtrlCreateInput("", 125, 125, 50, 20, $ES_READONLY)
 $LBLSCSupersaut = GUICtrlCreateLabel("Super-Saut", 25, 128, 54, 17)
 $PriveSettingInputDebloperso = GUICtrlCreateInput("", 125, 150, 50, 20, $ES_READONLY)
-$LBLSCDebloperso = GUICtrlCreateLabel("Débloquer Perso", 25, 153, 100, 17)
+$LBLSCDebloperso = GUICtrlCreateLabel("Dï¿½bloquer Perso", 25, 153, 100, 17)
 $PriveSettingInputClicktp = GUICtrlCreateInput("", 125, 175, 50, 20, $ES_READONLY)
 GUICtrlCreateLabel("Click to TP", 25, 178, 100, 17)
 $PriveSettingInputGocorps = GUICtrlCreateInput("", 125, 200, 50, 20, $ES_READONLY)
@@ -515,7 +515,7 @@ ElseIf iniRead($Setting, "Raccourcis - Prive", "Clicktptouche", "Erreur") = 12 T
 GUICtrlSetState($PriveClickTPToucheALT, $GUI_CHECKED)
 EndIf
 ;;; PVP
-$PriveSCsettingsGUIGRPPvP = GUICtrlCreateGroup("Jcj - Raccourcis de téléportation", 192, 10, 335, 390)
+$PriveSCsettingsGUIGRPPvP = GUICtrlCreateGroup("Jcj - Raccourcis de tï¿½lï¿½portation", 192, 10, 335, 390)
 ;;; GOULET
 $PriveSCsettingsGUIGRPGoulet = GUICtrlCreateGroup("Goulet", 197, 25, 160, 220)
 $PriveSettingInputGouletFlagA2 = GUICtrlCreateInput("", 300, 40, 50, 20, $ES_READONLY)
@@ -537,7 +537,7 @@ $LBLSCGouletSprintH2 = GUICtrlCreateLabel("Horde Sprint", 205, 218, 90, 17)
 ;;; ARATHI
 $PriveSCsettingsGUIGRPArathi = GUICtrlCreateGroup("Arathi", 277, 250, 160, 145)
 $PriveSettingInputArathiEcurie = GUICtrlCreateInput("", 380, 265, 50, 20, $ES_READONLY)
-$LBLSCArathiEcurie = GUICtrlCreateLabel("Écurie", 285, 268, 90, 17)
+$LBLSCArathiEcurie = GUICtrlCreateLabel("ï¿½curie", 285, 268, 90, 17)
 $PriveSettingInputArathiFerme = GUICtrlCreateInput("", 380, 290, 50, 20, $ES_READONLY)
 $LBLSCArathiFerme = GUICtrlCreateLabel("Ferme", 285, 293, 90, 17)
 $PriveSettingInputArathiMine = GUICtrlCreateInput("", 380, 315, 50, 20, $ES_READONLY)
@@ -561,9 +561,9 @@ $LBLSCOeilRuinesSaccageur = GUICtrlCreateLabel("Ruines Saccageur", 370, 143, 90,
 ;;; ALTERAC
 $PriveSCsettingsGUIGRPAlterac = GUICtrlCreateGroup("Alterac", 362, 175, 160, 70)
 $PriveSettingInputAlteracA2 = GUICtrlCreateInput("", 465, 190, 50, 20, $ES_READONLY)
-$LBLSCAlteracA2 = GUICtrlCreateLabel("Coté Alliance", 370, 193, 90, 17)
+$LBLSCAlteracA2 = GUICtrlCreateLabel("Cotï¿½ Alliance", 370, 193, 90, 17)
 $PriveSettingInputAlteracH2 = GUICtrlCreateInput("", 465, 215, 50, 20, $ES_READONLY)
-$LBLSCAlteracH2 = GUICtrlCreateLabel("Coté Horde", 370, 218, 90, 17)
+$LBLSCAlteracH2 = GUICtrlCreateLabel("Cotï¿½ Horde", 370, 218, 90, 17)
 ;;; Premier refresh pour pas avoir de cases vides (elles se refresh quand on clique dessus uniquement)
 Global $SCIniEmpl="Raccourcis - Prive"
 refreshSCtext("Flymod", $PriveSettingInputFlymod)
@@ -636,7 +636,7 @@ If IniRead($Setting,"Reglages","Interface","Erreur") = 0 Then
 	GUICtrlSetState($InterfaceOff, $GUI_CHECKED)
 EndIf
 If FileExists(@ScriptDir&"\thhh_settings\thhh_settings.ini") = 0 then
-MsgBox(0,"Erreur","Le fichier de configuration n'a pas été trouvé, vous ne pouvez donc pas utiliser de raccourcis."&@CRLF&"Assurez-vous d'avoir décompressé le fichier téléchargé avant de lancer The Hitchhiker's Hack."&@CRLF&" "&@CRLF&"Le fichier de configuration (thhh_settings.ini) doit se trouver dans le répertoire thhh_settings pour que le programme fonctionne pleinement."&@CRLF&" "&@CRLF&" "&@CRLF&"__________________________________________________________________"&@CRLF&"Configuration's file can't be found, you can't use shortcuts."&@CRLF&"Please make sure that you have extract the downloaded file before launching The Hitchhiker's Hack."&@CRLF&" "&@CRLF&"The configuration's (thhh_settings.ini) file must be in the folder thhh_settings to make the program work fine.")
+MsgBox(0,"Erreur","Le fichier de configuration n'a pas ï¿½tï¿½ trouvï¿½, vous ne pouvez donc pas utiliser de raccourcis."&@CRLF&"Assurez-vous d'avoir dï¿½compressï¿½ le fichier tï¿½lï¿½chargï¿½ avant de lancer The Hitchhiker's Hack."&@CRLF&" "&@CRLF&"Le fichier de configuration (thhh_settings.ini) doit se trouver dans le rï¿½pertoire thhh_settings pour que le programme fonctionne pleinement."&@CRLF&" "&@CRLF&" "&@CRLF&"__________________________________________________________________"&@CRLF&"Configuration's file can't be found, you can't use shortcuts."&@CRLF&"Please make sure that you have extract the downloaded file before launching The Hitchhiker's Hack."&@CRLF&" "&@CRLF&"The configuration's (thhh_settings.ini) file must be in the folder thhh_settings to make the program work fine.")
 EndIf
 language()
 
@@ -645,8 +645,8 @@ Do
 		Case $Reset
 			reset()
 		Case $About
-			MsgBox(0,"About","Merci aux communautées de www.mmo-trick.com, wwww.cheat-w0w.com et www.cheat-gam3.com pour leur soutient !"&@CRLF&"-----------------------------------------------------------------------------------------------------------------------------------------------"&@CRLF&" "&@CRLF&"Programme créé par Bob_74 pour la version "&$Version&" de WoW"&@CRLF&" "&@CRLF&"Ce programme ne sera plus mis à jour désormais, le code source est disponible sur www.mmo-trick.com, wwww.cheat-w0w.com, www.cheat-gam3.com et www.elitepvpers.de")
-	;;;;;;;;;;;; Si activé, pas de reset à la fermeture
+			MsgBox(0,"About","Merci aux communautï¿½es de www.mmo-trick.com, wwww.cheat-w0w.com et www.cheat-gam3.com pour leur soutient !"&@CRLF&"-----------------------------------------------------------------------------------------------------------------------------------------------"&@CRLF&" "&@CRLF&"Programme crï¿½ï¿½ par Bob_74 pour la version "&$Version&" de WoW"&@CRLF&" "&@CRLF&"Ce programme ne sera plus mis ï¿½ jour dï¿½sormais, le code source est disponible sur www.mmo-trick.com, wwww.cheat-w0w.com, www.cheat-gam3.com et www.elitepvpers.de")
+	;;;;;;;;;;;; Si activï¿½, pas de reset ï¿½ la fermeture
 		Case $ContinueOnExit
 			If GUICtrlRead($ContinueOnExit) = $GUI_CHECKED Then
 				IniWrite($Setting,"Reglages","Continue", 1)
@@ -671,7 +671,7 @@ Do
 				IniWrite($Setting,"Reglages","Interface", 1)
 			EndIf
 			If IniRead($Setting,"Langue","Langue","Erreur") = 0 Then
-				MsgBox(0,"","Vous devez redémarrer le programme pour que l'interface soit changée")
+				MsgBox(0,"","Vous devez redï¿½marrer le programme pour que l'interface soit changï¿½e")
 			Else
 				MsgBox(0,"","The program need to be restarted to change the interface")
 			EndIf
@@ -739,15 +739,15 @@ Do
 		Case $GUI_EVENT_CLOSE
 			If WinActive("Teleport List") Then
 				GUISetState(@SW_HIDE, $TPLIST)
-			ElseIf WinActive("  Débloquer le perso") Then
+			ElseIf WinActive("  Dï¿½bloquer le perso") Then
 				GUISetState(@SW_HIDE, $DebloPerso)
 			ElseIf WinActive("  Stop chute") Then
 				GUISetState(@SW_HIDE, $Stopchute)
 			ElseIf WinActive("Options") Then
 				GUISetState(@SW_HIDE, $GUISetting)
-			ElseIf WinActive("Raccourcis Privé") Then
+			ElseIf WinActive("Raccourcis Privï¿½") Then
 				If GUICtrlRead($PriveRaccourcis) = $GUI_CHECKED Then
-					assignSCprivate() ;;;;; Si on ferme la fenêtre de raccourcis, on en profite pour assigner les raccourcis si Raccourcis est coché
+					assignSCprivate() ;;;;; Si on ferme la fenï¿½tre de raccourcis, on en profite pour assigner les raccourcis si Raccourcis est cochï¿½
 				EndIf
 					If GUICtrlRead($PriveClickTPToucheSHIFT) = $GUI_CHECKED Then
 						$ClickTpTouche = 10
@@ -774,7 +774,7 @@ Do
 					GUISetState(@SW_HIDE, $PriveSCsettingsGUI)
 			ElseIf WinActive("Raccourcis Officiel") Then
 				If GUICtrlRead($Raccourcis) = $GUI_CHECKED Then
-					assignSC() ;;;;; Si on ferme la fenêtre de raccourcis, on en profite pour assigner les raccourcis si Raccourcis est coché
+					assignSC() ;;;;; Si on ferme la fenï¿½tre de raccourcis, on en profite pour assigner les raccourcis si Raccourcis est cochï¿½
 				EndIf
 					GUISetState(@SW_HIDE, $SCsettingsGUI)
 			ElseIf WinActive("The Hitchhiker's Hack") Then
@@ -785,7 +785,7 @@ Do
 				IniWrite($Setting,"Reglages","osupersautvalue",GUICtrlRead($SuperSautInput))
 				IniWrite($Setting,"Reglages","pXYZSpeed",GUICtrlRead($PriveXYZSpeedInput))
 					If IniRead($Setting,"Reglages","Reglages","Erreur") = 1 Then
-						savevalues()													  ;;;;; Sauvegarde des "valeurs" choisies (options enclenchées, etc)
+						savevalues()													  ;;;;; Sauvegarde des "valeurs" choisies (options enclenchï¿½es, etc)
 					EndIf
 						If IniRead($Setting,"Reglages","Continue","Erreur") = 1 Then
 						Else
@@ -967,7 +967,7 @@ Do
 			EndIf
 	EndSwitch
 	;;;;;;;;;;;;;;;;;;;;;;;;;;; REFRESH RACCOURCIS
-If WinGetState("Raccourcis Privé")=15 Then
+If WinGetState("Raccourcis Privï¿½")=15 Then
 	PriveSCsettings()
 ElseIf WinGetState("Raccourcis Officiel")=15 Then
 	SCsettings()
@@ -1012,7 +1012,7 @@ $PlayerBase = _MemoryRead($PB2+$PbPointer2,$WowProcess,"Ptr")
 $PlayerBase2 = _MemoryRead($PlayerBase+8,$WowProcess,"Ptr")
 If _MemoryRead($BuildAddr,$WowProcess,"char[31]")=$Build Then
 If IniRead($Setting,"Langue","Langue","Erreur") = 0 Then
-GUICtrlSetData($State,"Programme activé")
+GUICtrlSetData($State,"Programme activï¿½")
 GUICtrlSetColor($State,0x33AA00)
 ElseIf IniRead($Setting,"Langue","Langue","Erreur") = 1 Then
 GUICtrlSetData($State,"Program activated")
@@ -1644,14 +1644,14 @@ func priveteleportcamera()
 	If _MemoryRead($POSXCAMERA,$WowProcess,"float") <> 0 Then
 		If IniRead($Setting,"Reglages","Msgbox","Erreur")=1 Then
 			If IniRead($Setting,"Langue","Langue","Erreur") = 0 Then
-				$MsgboxTpCamera = MsgBox(4, "Attention", "Cette fonction ne fontionne que pour serveur privés."&@CRLF&" "&@CRLF&"Si vous êtes sur serveur officiel, cliquez sur Non."&@CRLF&"Si vous êtes sur serveur privé, vous pouvez cliquer sur Oui pour continuer.")
+				$MsgboxTpCamera = MsgBox(4, "Attention", "Cette fonction ne fontionne que pour serveur privï¿½s."&@CRLF&" "&@CRLF&"Si vous ï¿½tes sur serveur officiel, cliquez sur Non."&@CRLF&"Si vous ï¿½tes sur serveur privï¿½, vous pouvez cliquer sur Oui pour continuer.")
 			Else
 				$MsgboxTpCamera = MsgBox(4, "Warning", "This function si for Private server only."&@CRLF&" "&@CRLF&"If you are playing on live server, click on No."&@CRLF&"If you are playing on private server, you can click Yes to continue.")
 			EndIf
 				If $MsgboxTpCamera = 6 Then
 				IniWrite($Setting,"Reglages","Msgbox",0)
 					If IniRead($Setting,"Langue","Langue","Erreur") = 0 Then
-					MsgBox(0, "Avertissement","Ces messages n'apparaîtront plus désormais.")
+					MsgBox(0, "Avertissement","Ces messages n'apparaï¿½tront plus dï¿½sormais.")
 					Else
 					MsgBox(0, "Warning","These messages won't be displayed anymore.")
 					EndIf
@@ -2295,7 +2295,7 @@ func coor($arg)
 			_MemoryWrite($POSXCAMERA+52, $WowProcess, $SpecZoom, "Float")
 			_MemoryWrite($MEMORYCAMROTZ, $WowProcess, $RZvar, "float")
 			_MemoryWrite($MEMORYCAMROTX, $WowProcess, $RXvar, "float")
-			_MemoryWrite($OFS_PBSPECTATE, $WowProcess, 255, "Float");caméra spectateur activée
+			_MemoryWrite($OFS_PBSPECTATE, $WowProcess, 255, "Float");camï¿½ra spectateur activï¿½e
 			_MemoryWrite($POSXCAMERA+56, $WowProcess, 0, "float");vitesse
 			Until GUICtrlRead($CameraFollow)=$GUI_UNCHECKED
 		EndIf
@@ -2313,7 +2313,7 @@ func coor($arg)
 		_MemoryWrite($POSXCAMERA+4, $WowProcess, $POSY2, "Float")
 		_MemoryWrite($POSXCAMERA+8, $WowProcess, $POSZ2+4, "Float")
 		_MemoryWrite($POSXCAMERA+52, $WowProcess, $SpecZoom, "Float")
-		_MemoryWrite($OFS_PBSPECTATE, $WowProcess, 0, "float");caméra spectateur désactivée
+		_MemoryWrite($OFS_PBSPECTATE, $WowProcess, 0, "float");camï¿½ra spectateur dï¿½sactivï¿½e
 	EndIf
 EndFunc
 
