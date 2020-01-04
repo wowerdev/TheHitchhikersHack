@@ -1,5 +1,3 @@
-# Note: This software hasn't been updated since 2010 and won't be updated anymore
-
 ![The hitchhiker's Hack](https://i.imgur.com/YRdpTMA.png)
 
 
