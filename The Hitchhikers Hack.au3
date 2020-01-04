@@ -321,7 +321,8 @@ GUISetState(@SW_SHOW, $THHHGUI)
 #EndRegion ### END GUI ###
 #Region ### SETTINGS ###
 $GUISetting = GUICreate("Options", 345, 290, -1, -1, -1)
-$LangueGRP = GUICtrlCreateGroup("Langage", 250, 10, 80, 40)
+$LangueGRP = GUICtrlCreateGroup("Langage", 225, 10, 105, 40)
+$Russian = GUICtrlCreatePic(@ScriptDir&"\thhh_settings\ru.jpg", 230, 30, 20, 13)
 $Francais = GUICtrlCreatePic(@ScriptDir&"\thhh_settings\fr.jpg", 255, 30, 20, 13)
 $English = GUICtrlCreatePic(@ScriptDir&"\thhh_settings\en.jpg", 280, 30, 20, 13)
 $Espanol = GUICtrlCreatePic(@ScriptDir&"\thhh_settings\es.jpg", 305, 30, 20, 13)
@@ -662,6 +663,9 @@ Do
 				language()
 		Case $Espanol
 			IniWrite($Setting, "Langue", "Langue", "2")
+        language()
+        Case $Russian
+			IniWrite($Setting, "Langue", "Langue", "3")
 				language()
 	;;;;;;;;;;; DESACTIVATION DE L'INTERFACE (ancienne interface)
 		Case $InterfaceOff

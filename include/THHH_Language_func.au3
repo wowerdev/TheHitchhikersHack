@@ -1,10 +1,12 @@
-func language()
+﻿func language()
 If IniRead($Setting,"Langue","Langue","Erreur") = 0 Then
 $Section="Francais"
 ElseIf IniRead($Setting,"Langue","Langue","Erreur") = 1 Then
 $Section="English"
-Else
+ElseIf IniRead($Setting,"Langue","Langue","Erreur") = 2 Then
 $Section="Espanol"
+Else
+$Section="Russian"
 EndIf
 ;;;;;;;;;;;;;;; TABS + PRIVE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 $IniPriveOnTop = iniRead($Setting, $Section, "Ontop", "Erreur")
