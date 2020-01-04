@@ -2,12 +2,11 @@
 
 
 ## The Hitchhiker's Hack
-World of Warcraft cheating program for version from 3.3.2 to 3.3.5.  
-Download links available here : [https://github.com/Bob74/TheHitchhikersHack/releases](https://github.com/Bob74/TheHitchhikersHack/releases)
+World of Warcraft cheating program for version from 3.3.5.  
+Download links available here : [Releases](https://github.com/wowerdev/TheHitchhikersHack/releases)
 
 ## Documentation
-[French PDF manual](https://github.com/Bob74/TheHitchhikersHack/blob/master/thhh_manuel_Francais.pdf)  
-[English PDF manual](https://github.com/Bob74/TheHitchhikersHack/blob/master/thhh_manuel_English.pdf)
+[English PDF manual](https://github.com/wowerdev/TheHitchhikersHack/blob/master/thhh_manuel_English.pdf)
 
 # Screenshots
 
