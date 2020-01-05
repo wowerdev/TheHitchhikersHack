@@ -167,16 +167,16 @@ $LBLMount = GUICtrlCreateLabel("Monture en int�rieur", 30, 251, 97, 17)
 $PriveWallClimbON = GUICtrlCreateCheckbox("Checkbox", 132, 270, 15, 15)
 $LBLWallclimb = GUICtrlCreateLabel("Grimper partout", 30, 271, 75, 17)
 $NoCooldownCheck = GUICtrlCreateCheckbox("Checkbox", 132, 290, 15, 15)
-GUICtrlCreateLabel("NoCooldown",30,291,65,17)
+GUICtrlCreateLabel("Убрать ГКД",30,291,65,17)
 $PriveWalljumpON = GUICtrlCreateCheckbox("Checkbox", 132, 310, 15, 15)
-$PriveLBLWalljump = GUICtrlCreateLabel("Walljump", 30, 311, 80, 17)
+$PriveLBLWalljump = GUICtrlCreateLabel("Прыг. от стены", 30, 311, 80, 17)
 $PriveInfiniteJumpON = GUICtrlCreateCheckbox("Checkbox", 132, 330, 15, 15)
 $LBLInfiniteJump = GUICtrlCreateLabel("Multi-sauts", 30, 331, 70, 17)
 $PriveSuperSautON = GUICtrlCreateCheckbox("Checkbox", 132, 350, 15, 15)
 $LBLSupersaut = GUICtrlCreateLabel("Super-saut", 30, 351, 66, 17)
 $PriveSuperSautInput = GUICtrlCreateInput(22, 30, 371, 115, 20)
-$PriveFactionMENU = GUICtrlCreateCombo("Faction",30, 395,115, 25)
-GUICtrlSetData(-1, "Cr�ature|Alliance|Horde")
+$PriveFactionMENU = GUICtrlCreateCombo("Фракция",30, 395,115, 25)
+GUICtrlSetData(-1, "Нейтральная|Альянс|Орда")
 $PriveDebloPerso = GUICtrlCreateButton("D�bloquer Perso", 30, 420, 116, 25, $WS_GROUP)
 $StopchuteON = GUICtrlCreateButton("Stopper chute", 30, 445, 116, 25, $WS_GROUP)
 $PriveTrackHerbes = GUICtrlCreateCheckbox("Herbes", 30, 500, 69, 15)
@@ -225,7 +225,7 @@ $LBLCollisionsWMOOf = GUICtrlCreateLabel("D�sactiver collisions WMO",167,246,1
 $CollisionsAll = GUICtrlCreateCheckbox("Checkbox",205,265,17,17)
 GUICtrlCreateLabel("Noclip",167,266,130,17)
 $WalljumpON = GUICtrlCreateCheckbox("Checkbox", 135, 125, 15, 15)
-$LBLWalljumpOf = GUICtrlCreateLabel("Walljump", 35, 125, 54, 17)
+$LBLWalljumpOf = GUICtrlCreateLabel("Прыг. от стены", 35, 125, 54, 17)
 $WaterWalkON = GUICtrlCreateCheckbox("Checkbox", 135, 145, 15, 15)
 ;GUICtrlSetState($WaterWalkON,$GUI_DISABLE) ;pour version 3.3.2
 $LBLWaterWalkOf = GUICtrlCreateLabel("Marche sur l'eau", 35, 145, 90, 17)
@@ -1021,8 +1021,11 @@ GUICtrlSetColor($State,0x33AA00)
 ElseIf IniRead($Setting,"Langue","Langue","Erreur") = 1 Then
 GUICtrlSetData($State,"Program activated")
 GUICtrlSetColor($State,0x33AA00)
-Else
+ElseIf IniRead($Setting,"Langue","Langue","Erreur") = 2 Then
 GUICtrlSetData($State,"Program activated")
+GUICtrlSetColor($State,0x33AA00)
+Else
+GUICtrlSetData($State,"Программа активирована")
 GUICtrlSetColor($State,0x33AA00)
 EndIf
 Else
