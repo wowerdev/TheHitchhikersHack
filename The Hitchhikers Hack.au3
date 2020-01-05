@@ -61,7 +61,7 @@ _GUICtrlListView_SetColumnWidth($WowProcesslistview,0,40)
 _GUICtrlListView_SetItemSelected($WowProcesslistview,0)
 $SelectedPID = _GUICtrlListView_GetSelectedIndices(GUICtrlGetHandle($WowProcesslistview))
 If $Wowpid1 = "" Then
-MsgBox(0,"", "Wow n'est pas lanc�")
+MsgBox(0,"", "Не найден процесс WoW")
 Exit
 Else
 ;;; On sauve le nombre de processus pour comparer ensuite avec le nombre de processus actuels
